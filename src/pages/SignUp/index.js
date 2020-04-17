@@ -12,6 +12,7 @@ export default function SignUp() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [role, setRole] = useState("");
   const dispatch = useDispatch();
   const token = useSelector(selectToken);
   const history = useHistory();
@@ -25,11 +26,12 @@ export default function SignUp() {
   function submitForm(event) {
     event.preventDefault();
 
-    dispatch(signUp(name, email, password));
+    dispatch(signUp(name, email, password, role));
 
     setEmail("");
     setPassword("");
     setName("");
+    setRole("");
   }
 
   return (
@@ -40,7 +42,7 @@ export default function SignUp() {
           <Form.Label>Name</Form.Label>
           <Form.Control
             value={name}
-            onChange={event => setName(event.target.value)}
+            onChange={(event) => setName(event.target.value)}
             type="text"
             placeholder="Enter name"
             required
@@ -50,7 +52,7 @@ export default function SignUp() {
           <Form.Label>Email address</Form.Label>
           <Form.Control
             value={email}
-            onChange={event => setEmail(event.target.value)}
+            onChange={(event) => setEmail(event.target.value)}
             type="email"
             placeholder="Enter email"
             required
@@ -64,12 +66,22 @@ export default function SignUp() {
           <Form.Label>Password</Form.Label>
           <Form.Control
             value={password}
-            onChange={event => setPassword(event.target.value)}
+            onChange={(event) => setPassword(event.target.value)}
             type="password"
             placeholder="Password"
             required
           />
         </Form.Group>
+
+        <Form.Group controlId="exampleForm.SelectCustomSizeSm">
+          <Form.Label>Select your role</Form.Label>
+          <Form.Control as="select" size="sm" value={role} onChange={(event) => setRole(event.target.value)} >
+            <option disabled></option>
+            <option>teacher</option>
+            <option>student</option>
+          </Form.Control>
+        </Form.Group>
+
         <Form.Group className="mt-5">
           <Button variant="primary" type="submit" onClick={submitForm}>
             Sign up
