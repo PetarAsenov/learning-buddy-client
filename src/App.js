@@ -16,6 +16,7 @@ import { getUserWithStoredToken } from "./store/user/actions";
 import { fetchSubjects } from "./store/subject/actions";
 import { Jumbotron } from "react-bootstrap";
 import SessionsBySubject from "./pages/SessionsBySubject";
+import ListSessions from "./pages/ListSessions";
 
 const Other = () => (
   <Jumbotron>
@@ -49,6 +50,7 @@ function App() {
           ))}</div>}
         </Route>
         <Route path="/subjects/:id" component={SessionsBySubject} />
+        <Route path="/sessions" component={ListSessions} />
         <Route path="/other" component={Other} />
         <Route path="/signup" component={SignUp} />
         <Route path="/login" component={Login} />
