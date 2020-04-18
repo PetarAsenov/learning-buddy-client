@@ -17,11 +17,6 @@ import { fetchSubjects } from "./store/subject/actions";
 import { Jumbotron } from "react-bootstrap";
 import SessionsBySubject from "./pages/SessionsBySubject";
 
-const Home = () => (
-  <Jumbotron>
-    <h1>Home</h1>
-  </Jumbotron>
-);
 const Other = () => (
   <Jumbotron>
     <h1>Other</h1>
@@ -32,7 +27,6 @@ function App() {
   const dispatch = useDispatch();
   const isLoading = useSelector(selectAppLoading);
   const subjects = useSelector(selectSubject);
-  console.log(subjects)
 
   useEffect(() => {
     dispatch(getUserWithStoredToken());

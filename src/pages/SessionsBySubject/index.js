@@ -11,17 +11,20 @@ export default function SessionsBySubject() {
   const subjects = useSelector(selectSubject);
   const subjectDetails =
     subjects && subjects.filter((subject) => subject.id === parseInt(id))[0];
-  console.log(subjectDetails);
 
   useEffect(() => {
     dispatch(fetchSubjectDetails(id));
-  }, [dispatch]);
+  }, [dispatch, id]);
 
   return (
     <div>
       {subjectDetails && (
         <div>
-          <img width="300px" src={subjectDetails.image_Url} />
+          <img
+            width="300px"
+            src={subjectDetails.image_Url}
+            alt={subjectDetails.name}
+          />
           {subjectDetails.sessions &&
             subjectDetails.sessions.map((session) => (
               <Session key={session.id} session={session} />
