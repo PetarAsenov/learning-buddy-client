@@ -15,6 +15,7 @@ import { selectSubject } from "./store/subject/selectors";
 import { getUserWithStoredToken } from "./store/user/actions";
 import { fetchSubjects } from "./store/subject/actions";
 import { Jumbotron } from "react-bootstrap";
+import SessionsBySubject from "./pages/SessionsBySubject";
 
 const Home = () => (
   <Jumbotron>
@@ -40,7 +41,6 @@ function App() {
   useEffect(() => {
     dispatch(fetchSubjects());
   }, [dispatch]);
-
   return (
     <div className="App">
       <Navigation />
@@ -54,6 +54,7 @@ function App() {
             <Subject key={subject.id} subject={subject} />
           ))}</div>}
         </Route>
+        <Route path="/subjects/:id" component={SessionsBySubject} />
         <Route path="/other" component={Other} />
         <Route path="/signup" component={SignUp} />
         <Route path="/login" component={Login} />

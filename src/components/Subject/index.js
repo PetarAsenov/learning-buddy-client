@@ -5,7 +5,7 @@ import "./style.css"
 export default function Subject({ subject }) {
 
   return (
-    <Link to={`/books/${subject.name}`} style={{ textDecoration: "none", color: "black" }}>
+    <Link to={`/subjects/${subject.id}`} style={{ textDecoration: "none", color: "black" }}>
       <div className="subject">
         <img width="300px"  height="180px" src={subject.image_Url} alt={subject.name} />
         <h2><strong>{subject.name}</strong></h2>
