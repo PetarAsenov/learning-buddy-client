@@ -6,11 +6,14 @@ import Navigation from "./components/Navigation";
 import Loading from "./components/Loading";
 import MessageBox from "./components/MessageBox";
 import SignUp from "./pages/SignUp";
+import Subject from "./components/Subject";
 import Login from "./pages/Login";
 
 import { useDispatch, useSelector } from "react-redux";
 import { selectAppLoading } from "./store/appState/selectors";
+import { selectSubject } from "./store/subject/selectors";
 import { getUserWithStoredToken } from "./store/user/actions";
+import { fetchSubjects } from "./store/subject/actions";
 import { Jumbotron } from "react-bootstrap";
 
 const Home = () => (
@@ -27,9 +30,15 @@ const Other = () => (
 function App() {
   const dispatch = useDispatch();
   const isLoading = useSelector(selectAppLoading);
+  const subjects = useSelector(selectSubject);
+  console.log(subjects)
 
   useEffect(() => {
     dispatch(getUserWithStoredToken());
+  }, [dispatch]);
+
+  useEffect(() => {
+    dispatch(fetchSubjects());
   }, [dispatch]);
 
   return (
@@ -38,7 +47,13 @@ function App() {
       <MessageBox />
       {isLoading ? <Loading /> : null}
       <Switch>
-        <Route exact path="/" component={Home} />
+        <Route exact path="/" >
+          {subjects && <div className="box">
+            
+          {subjects.map((subject) => (
+            <Subject key={subject.id} subject={subject} />
+          ))}</div>}
+        </Route>
         <Route path="/other" component={Other} />
         <Route path="/signup" component={SignUp} />
         <Route path="/login" component={Login} />
