@@ -9,10 +9,10 @@ export const fetchSessionsSuccess = (sessions) => ({
 });
 
 
-export const fetchSessions = () => {
+export const fetchSessions = (search = '') => {
   return async (dispatch, getState) => {
     try {
-      const response = await axios.get(`${apiUrl}/sessions`);
+      const response = await axios.get(`${apiUrl}/sessions?title=${search}`);
       dispatch(fetchSessionsSuccess(response.data));
     } catch (error) {
       console.error(error.message);
