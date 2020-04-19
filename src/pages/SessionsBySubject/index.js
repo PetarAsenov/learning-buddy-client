@@ -10,7 +10,7 @@ export default function SessionsBySubject() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchSubjectDetails(id));
+    setTimeout(() => dispatch(fetchSubjectDetails(id)), 100)
   }, [dispatch, id]);
   const subjectDetails = useSelector(selectSubjectById(id))
 
