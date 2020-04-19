@@ -17,6 +17,7 @@ import { fetchSubjects } from "./store/subject/actions";
 import { Jumbotron } from "react-bootstrap";
 import SessionsBySubject from "./pages/SessionsBySubject";
 import ListSessions from "./pages/ListSessions";
+import CreateSessionForm from "./pages/CreateSession";
 
 const Other = () => (
   <Jumbotron>
@@ -54,6 +55,7 @@ function App() {
         <Route path="/other" component={Other} />
         <Route path="/signup" component={SignUp} />
         <Route path="/login" component={Login} />
+        <Route path="/new-session" component={CreateSessionForm} />
       </Switch>
     </div>
   );
