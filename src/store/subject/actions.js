@@ -18,7 +18,6 @@ export const fetchSubjects = () => {
   return async (dispatch, getState) => {
     try {
       const response = await axios.get(`${apiUrl}/subjects`);
-      console.log(response.data)
       dispatch(fetchSubjectsSuccess(response.data));
     } catch (error) {
       console.error(error.message);
@@ -30,7 +29,6 @@ export const fetchSubjectDetails = (id) => {
   return async (dispatch, getState) => {
     try {
       const response = await axios.get(`${apiUrl}/subjects/${id}`);
-      console.log(response.data)
       dispatch(fetchSubjectDetailsSuccess(response.data));
     } catch (error) {
       console.error(error.message);
