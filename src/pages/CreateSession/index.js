@@ -9,6 +9,8 @@ import { Jumbotron } from "react-bootstrap";
 import { selectSubject } from "../../store/subject/selectors";
 import { fetchSubjects } from "../../store/subject/actions";
 import { createSession } from "../../store/session/actions";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 export default function CreateSessionForm() {
   const { token } = useSelector(selectUser);
@@ -17,16 +19,18 @@ export default function CreateSessionForm() {
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [start_date, setStart_date] = useState("");
-  const [end_date, setEnd_date] = useState("");
+  const [start_date, setStart_date] = useState(new Date());
+  const [end_date, setEnd_date] = useState(
+    new Date().getTime() + 1000 * 60 * 60
+  );
   const [subject_id, setSubject_id] = useState("select");
 
   const history = useHistory();
   const dispatch = useDispatch();
-  const teacher_id = user.id
-  const isTeacher = !user.role ? true : user.role === 'teacher'
+  const teacher_id = user.id;
+  const isTeacher = !user.role ? true : user.role === "teacher";
 
-  if (token === null || !isTeacher ) {
+  if (token === null || !isTeacher) {
     history.push("/");
   }
 
@@ -34,9 +38,8 @@ export default function CreateSessionForm() {
     dispatch(fetchSubjects());
   }, [dispatch]);
 
-  function submitForm(event) {
+ function submitForm(event) {
     event.preventDefault();
-
     dispatch(
       createSession(
         title,
@@ -47,11 +50,11 @@ export default function CreateSessionForm() {
         teacher_id
       )
     );
-    console.log(`title ${title}
-    description ${description}
-  start_date ${start_date}
-  end_date ${end_date}
-  subject_id ${subject_id}`);
+    setTitle('')
+    setDescription('')
+    setStart_date(new Date())
+    setEnd_date(new Date().getTime() + 60 * 60 * 1000 )
+    setSubject_id('select')
   }
 
   return (
@@ -81,22 +84,35 @@ export default function CreateSessionForm() {
         </Form.Group>
 
         <Form.Group>
-          <Form.Label>Start date</Form.Label>
-          <Form.Control
-            value={start_date}
-            onChange={(event) => setStart_date(event.target.value)}
-            type="text"
-            required
+          <Form.Label>Start time</Form.Label>
+          <br />
+          <DatePicker
+            selected={start_date}
+            onChange={(date) => {
+              setStart_date(date)
+              setEnd_date(date.getTime() + 60 * 60 * 1000);
+            }}
+            showTimeSelect
+            minDate={new Date()}
+            timeFormat="HH:mm"
+            timeIntervals={15}
+            timeCaption="time"
+            dateFormat="MMMM d, yyyy h:mm aa"
           />
         </Form.Group>
 
         <Form.Group>
-          <Form.Label>End date</Form.Label>
-          <Form.Control
-            value={end_date}
-            onChange={(event) => setEnd_date(event.target.value)}
-            type="text"
-            required
+          <Form.Label>End time</Form.Label>
+          <br />
+          <DatePicker
+            selected={end_date}
+            onChange={(date) => setEnd_date(date)}
+            showTimeSelect
+            minDate={start_date}
+            timeFormat="HH:mm"
+            timeIntervals={15}
+            timeCaption="time"
+            dateFormat="MMMM d, yyyy h:mm aa"
           />
         </Form.Group>
 
