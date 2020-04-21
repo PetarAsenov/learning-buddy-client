@@ -25,7 +25,7 @@ export default function SessionsBySubject() {
           />
           {subjectDetails.sessions &&
             subjectDetails.sessions.map((session) => (
-              <Session key={session.id} session={session} />
+              <Session key={session.id} session={session} showBtn={true} show={true} />
             ))}
         </div>
       )}

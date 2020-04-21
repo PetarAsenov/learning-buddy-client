@@ -30,7 +30,7 @@ export default function ListSessions() {
       </Form>
       {sessions &&
         sessions.map((session) => (
-          <Session key={session.id} session={session} />
+          <Session key={session.id} session={session} show={true}/>
         ))}
     </div>
   );
