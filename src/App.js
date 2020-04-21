@@ -12,12 +12,13 @@ import Login from "./pages/Login";
 import { useDispatch, useSelector } from "react-redux";
 import { selectAppLoading } from "./store/appState/selectors";
 import { selectSubject } from "./store/subject/selectors";
-import { getUserWithStoredToken } from "./store/user/actions";
+import { getUserProfile } from "./store/user/actions";
 import { fetchSubjects } from "./store/subject/actions";
 import { Jumbotron } from "react-bootstrap";
 import SessionsBySubject from "./pages/SessionsBySubject";
 import ListSessions from "./pages/ListSessions";
 import CreateSessionForm from "./pages/CreateSession";
+import MyProfile from "./pages/Profile";
 
 const Other = () => (
   <Jumbotron>
@@ -31,7 +32,7 @@ function App() {
   const subjects = useSelector(selectSubject);
 
   useEffect(() => {
-    dispatch(getUserWithStoredToken());
+    dispatch(getUserProfile());
   }, [dispatch]);
 
   useEffect(() => {
@@ -56,6 +57,7 @@ function App() {
         <Route path="/signup" component={SignUp} />
         <Route path="/login" component={Login} />
         <Route path="/new-session" component={CreateSessionForm} />
+        <Route path="/profile" component={MyProfile} />
       </Switch>
     </div>
   );
