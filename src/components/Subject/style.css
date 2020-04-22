@@ -13,32 +13,6 @@
   }
 }
 
-.box {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  text-align: center;
-  background-color: white;
+.animated {
   animation: slideInFromLeft 2.5s ease;
-}
-
-.subject {
-  padding: 50px 10px;
-  margin: 20px;
-  flex: 0 0 450px;
-  border: 1px solid rgb(59, 59, 57);
-  opacity: 85%;
-  background-color: #eaebe4;
-  }
-
-.subject:hover {
-  opacity: 100%;
-}
-
-img {
-  margin: 10px;
-}
-
-p {
-  font-size: 14px;
 }

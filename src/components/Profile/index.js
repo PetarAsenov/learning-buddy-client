@@ -9,9 +9,9 @@ import {
   selectUpcomingSessionByParticipant,
   selectPastSessionByParticipant,
 } from "../../store/session/selectors";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
-export default function Profile({ profile }) {
+export default function Profile({ profile, btn }) {
   const isTeacher = profile.role === "teacher";
   const teacherUpcomingSessions = useSelector(
     selectUpcomingSessionByTeacher(profile.id)
@@ -42,7 +42,7 @@ export default function Profile({ profile }) {
             alt={profile.name}
           />
           <p>{profile.description}</p>
-          <Button onClick={() => setShowEditForm(!showEditForm)}>Edit</Button>
+          {btn && <Button onClick={() => setShowEditForm(!showEditForm)}>Edit</Button>}
         </div>
       )}
 
