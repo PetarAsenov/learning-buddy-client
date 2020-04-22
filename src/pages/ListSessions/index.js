@@ -2,14 +2,15 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchSessions } from "../../store/session/actions";
 import Session from "../../components/Session";
-import { selectSession } from "../../store/session/selectors";
+import { selectUpcomingSessions, selectPastSessions } from "../../store/session/selectors";
 import { Col } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 
 export default function ListSessions() {
   const dispatch = useDispatch();
-  const sessions = useSelector(selectSession);
   const [search, setSearch] = useState('')
+  const upcomingSessions = useSelector(selectUpcomingSessions)
+  const pastSessions = useSelector(selectPastSessions)
   
   useEffect(() => {
     dispatch(fetchSessions(search));
@@ -28,9 +29,15 @@ export default function ListSessions() {
           />
         </Form.Group>
       </Form>
-      {sessions &&
-        sessions.map((session) => (
-          <Session key={session.id} session={session} show={true}/>
+      <h2>Upcoming Sessions</h2>
+      {upcomingSessions &&
+        upcomingSessions.map((session) => (
+          <Session key={session.id} session={session} teacher={true} btn={true}/>
+        ))}
+      <h2>Past Sessions</h2>
+      {pastSessions &&
+        pastSessions.map((session) => (
+          <Session key={session.id} session={session} teacher={true} btn={false}/>
         ))}
     </div>
   );
