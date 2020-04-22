@@ -23,10 +23,10 @@
 }
 
 .teacher {
-  padding: 50px 10px;
+  padding: 35px 10px;
   margin: 20px;
-  width: 300px;
-  flex: 0 0 450px;
+  width: 280px;
+  height: 300px;
   border: 1px solid rgb(59, 59, 57);
   opacity: 85%;
   background-color: #eaebe4;

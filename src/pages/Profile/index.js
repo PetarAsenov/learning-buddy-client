@@ -23,6 +23,6 @@ export default function MyProfile() {
   useEffect(() => {
     dispatch(fetchSessions());
   }, [dispatch]);
-
-  return <div>{user && <Profile profile={user} />}</div>;
+  console.log(user)
+  return <div>{user && <Profile profile={user} btn/>}</div>;
 }

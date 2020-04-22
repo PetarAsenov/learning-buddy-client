@@ -27,6 +27,7 @@ export default function Navigation() {
         <Nav style={{ width: "100%" }} fill>
           <NavbarItem exact path="/" linkText="Home" />
           <NavbarItem path="/sessions" linkText="See all sessions" />
+          <NavbarItem path="/teachers" linkText="See all teachers" />
           {showNewSession && <NavbarItem path="/new-session" linkText="Create a session" />}
           {loginLogoutControls}
         </Nav>

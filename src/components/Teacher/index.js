@@ -4,14 +4,14 @@ import "./style.css";
 
 export default function Teacher({ teachers }) {
   return teachers.map((teacher) => (
-    <Link
+    <Link key={teacher.id}
       to={`/teachers/${teacher.id}`}
       style={{ textDecoration: "none", color: "black" }}
     >
       <div className="teacher">
         <img
-          width="150px"
-          height="200px"
+          width="140px"
+          height="150px"
           src={
             teacher.image_Url ||
             "https://sportgeneeskunderotterdam.nl/wp-content/uploads/2019/07/no-image-available.png"

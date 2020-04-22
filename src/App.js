@@ -19,13 +19,8 @@ import CreateSessionForm from "./pages/CreateSession";
 import MyProfile from "./pages/Profile";
 import ListSubjects from "./pages/Subjects";
 import ListTeachers from "./pages/ListTeachers";
+import TeacherDetails from "./pages/TeacherDetails";
 
-
-const Other = () => (
-  <Jumbotron>
-    <h1>Other</h1>
-  </Jumbotron>
-);
 
 function App() {
   const dispatch = useDispatch();
@@ -35,9 +30,6 @@ function App() {
     dispatch(getUserProfile());
   }, [dispatch]);
 
-  useEffect(() => {
-    dispatch(fetchSubjects());
-  }, [dispatch]);
   return (
     <div className="App">
       <Navigation />
@@ -46,8 +38,8 @@ function App() {
       <Switch>
         <Route exact path="/" component={ListSubjects} />
         <Route path="/subjects/:id" component={SessionsBySubject} />
+        <Route path="/teachers/:id" component={TeacherDetails} />
         <Route path="/sessions" component={ListSessions} />
-        <Route path="/other" component={Other} />
         <Route path="/signup" component={SignUp} />
         <Route path="/login" component={Login} />
         <Route path="/new-session" component={CreateSessionForm} />
