@@ -39,12 +39,12 @@ export default function SessionsBySubject() {
           <h2>Upcoming Sessions</h2>
           {upcomingSessionsBySubject &&
             upcomingSessionsBySubject.map((session) => (
-              <Session key={session.id} session={session} btn={true} />
+              <Session key={session.id} session={session} btn hideSubject/>
             ))}
           <h2>Past Sessions</h2>
           {pastSessionsBySubject &&
             pastSessionsBySubject.map((session) => (
-              <Session key={session.id} session={session} btn={false} />
+              <Session key={session.id} session={session} btn hideSubject/>
             ))}
         </div>
       )}

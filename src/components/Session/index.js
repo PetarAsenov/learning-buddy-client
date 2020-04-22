@@ -7,7 +7,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { bookSession, unBookSession } from "../../store/session/actions";
 import { NavLink } from "react-router-dom";
 
-export default function Session({ session, teacher, btn }) {
+export default function Session({ session, teacher, btn, hideSubject }) {
   const startDate = utcToZonedTime(session.start_date, "YYYY")
     .toString()
     .slice(0, 21);
@@ -33,6 +33,7 @@ export default function Session({ session, teacher, btn }) {
       <p>{session.description}</p>
       <p>{startDate}</p>
       <p>{endDate}</p>
+      {!hideSubject && <p>Subject: {session.subject.name}</p>}
       <div>
         {teacher && <p>Teacher: {session.teacher.name}</p>}
         <p>Participants: {session.participants.length}</p>
