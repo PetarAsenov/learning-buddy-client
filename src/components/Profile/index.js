@@ -9,7 +9,7 @@ import {
   selectUpcomingSessionByParticipant,
   selectPastSessionByParticipant,
 } from "../../store/session/selectors";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 export default function Profile({ profile }) {
   const isTeacher = profile.role === "teacher";

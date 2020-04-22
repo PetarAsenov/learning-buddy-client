@@ -1,0 +1,45 @@
+@keyframes slideInFromLeft {
+  0% {
+    opacity: 0;
+    transform: translate(-2.5rem, 0);
+    background-color: rgb(245, 242, 224);
+  }
+  20% {
+    transform: translate(0, 0);
+  }
+  100% {
+    opacity: 1;
+    background-color: white;
+  }
+}
+
+.box {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  text-align: center;
+  background-color: white;
+  animation: slideInFromLeft 2.5s ease;
+}
+
+.teacher {
+  padding: 50px 10px;
+  margin: 20px;
+  width: 300px;
+  flex: 0 0 450px;
+  border: 1px solid rgb(59, 59, 57);
+  opacity: 85%;
+  background-color: #eaebe4;
+  }
+
+.teacher:hover {
+  opacity: 100%;
+}
+
+img {
+  margin: 10px;
+}
+
+p {
+  font-size: 14px;
+}
