@@ -24,5 +24,5 @@ export default function MyProfile() {
     dispatch(fetchSessions());
   }, [dispatch]);
   console.log(user)
-  return <div>{user && <Profile profile={user} btn/>}</div>;
+  return <div>{user && <Profile profile={user} btn participants/>}</div>;
 }
