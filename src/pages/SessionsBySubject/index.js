@@ -19,13 +19,13 @@ export default function SessionsBySubject() {
     subjectDetails &&
     subjectDetails.sessions &&
     subjectDetails.sessions.filter(
-      (session) => utcToZonedTime(session.start_date) >= new Date()
+      (session) => utcToZonedTime(session.start_date,"Europe/Berlin") >= new Date()
     );
   const pastSessionsBySubject =
     subjectDetails &&
     subjectDetails.sessions &&
     subjectDetails.sessions.filter(
-      (session) => utcToZonedTime(session.start_date) <= new Date()
+      (session) => utcToZonedTime(session.start_date,"Europe/Berlin") <= new Date()
     );
 
   return (

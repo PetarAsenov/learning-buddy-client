@@ -10,7 +10,7 @@ import "./style.css";
 
 
 export default function Session({ session, teacher, btn, hideSubject,bg }) {
-  const startDate = utcToZonedTime(session.start_date, "YYYY")
+  const startDate = utcToZonedTime(session.start_date, "Europe/Berlin")
     .toString()
     .slice(0, 21);
   const endDate = utcToZonedTime(session.end_date, "Europe/Berlin")
