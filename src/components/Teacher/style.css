@@ -25,19 +25,21 @@
 .teacher {
   padding: 35px 10px;
   margin: 20px;
-  width: 280px;
+  width: 250px;
   height: 300px;
   border: 1px solid rgb(59, 59, 57);
   opacity: 85%;
-  background-color: #eaebe4;
-  }
+  background-color: #a5cf91;
+}
 
 .teacher:hover {
   opacity: 100%;
 }
 
-img {
-  margin: 10px;
+.teacher img {
+  margin: 10px 0px;
+  height: 150px;
+  width: 180px;
 }
 
 p {

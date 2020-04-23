@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectTeacher } from "../../store/teacher/selectors";
-import Teacher from "../../components/Teacher";
+import Teacher from "../Teacher";
 import { fetchTeachers } from "../../store/teacher/actions";
 
 export default function ListTeachers() {

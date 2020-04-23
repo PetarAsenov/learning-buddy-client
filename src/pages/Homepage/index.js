@@ -1,6 +1,6 @@
 import React from 'react'
-import ListSubjects from '../Subjects'
-import ListTeachers from '../ListTeachers'
+import ListSubjects from '../../components/Subjects'
+import ListTeachers from '../../components/ListTeachers'
 
 export default function index() {
   return (

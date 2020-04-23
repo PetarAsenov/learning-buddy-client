@@ -4,7 +4,7 @@ import { fetchSessions } from "../../store/session/actions";
 import Session from "../../components/Session";
 import { selectUpcomingSessions, selectPastSessions } from "../../store/session/selectors";
 import { selectSubject } from "../../store/subject/selectors";
-import { Col } from "react-bootstrap";
+import { Col, Container, CardDeck } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 
 export default function ListSessions() {
@@ -46,25 +46,29 @@ export default function ListSessions() {
         </Form.Group>
       </Form>
       <h2>Upcoming Sessions</h2>
-      {upcomingSessions &&
-        upcomingSessions.map((session) => (
+      {upcomingSessions && <Container ><CardDeck>
+        {upcomingSessions.map((session) => (
           <Session
             key={session.id}
             session={session}
             teacher={true}
             btn={true}
+            bg="light"
           />
-        ))}
+        ))}</CardDeck></Container>}
       <h2>Past Sessions</h2>
-      {pastSessions &&
-        pastSessions.map((session) => (
+      {pastSessions && <Container><CardDeck>
+
+        {pastSessions.map((session) => (
           <Session
             key={session.id}
             session={session}
             teacher={true}
             btn={false}
-          />
-        ))}
+            bg="secondary"
+            />
+            ))}
+            </CardDeck></Container>}
     </div>
   );
 }

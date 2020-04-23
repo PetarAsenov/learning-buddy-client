@@ -11,6 +11,7 @@ import {
   selectPastSessionByParticipant,
 } from "../../store/session/selectors";
 import { useSelector } from "react-redux";
+import { Container, CardDeck } from "react-bootstrap";
 
 export default function Profile({ profile, btn, participants }) {
   const isTeacher = profile.role === "teacher";
@@ -53,48 +54,54 @@ export default function Profile({ profile, btn, participants }) {
         <EditProfile hideEditForm={() => setShowEditForm(!showEditForm)} />
       )}
       {isTeacher &&
-        teacherUpcomingSessions &&
-        teacherUpcomingSessions.map((session) => (
+        teacherUpcomingSessions && <Container ><CardDeck>
+        {teacherUpcomingSessions.map((session) => (
           <div>
             <Session
               key={session.id}
               session={session}
               teacher={false}
               btn={false}
+              bg="light"
             />
             {participants && <Participants session={session} />}
           </div>
         ))}
+        </CardDeck></Container >}
       {isTeacher &&
-        teacherPastSessions &&
-        teacherPastSessions.map((session) => (
+        teacherPastSessions && <Container ><CardDeck>
+        {teacherPastSessions.map((session) => (
           <div>
             <Session
               key={session.id}
               session={session}
               teacher={false}
               btn={false}
+              bg="secondary"
             />
             {participants && <Participants session={session} />}
           </div>
         ))}
-      {participantUpcomingSessions &&
-        participantUpcomingSessions.map((session) => (
-          <Session key={session.id} session={session} teacher btn />
+        </CardDeck></Container >}
+      {participantUpcomingSessions && <Container ><CardDeck>
+        {participantUpcomingSessions.map((session) => (
+          <Session key={session.id} session={session} teacher btn bg="light"/>
         ))}
       {participantPastSessions &&
         participantPastSessions.map((session) => (
-          <Session key={session.id} session={session} teacher btn={false} />
+          <Session key={session.id} session={session} teacher btn={false} bg="secondary"/>
         ))}
+        </CardDeck></Container >}
       {isTeacher &&
-        profile.receivedReviews &&
-        profile.receivedReviews.map((review) => (
+        profile.receivedReviews && <Container ><CardDeck>
+        {profile.receivedReviews.map((review) => (
           // <Review key={review.id} session={review} />
           <div key={review.id}>
             <p>{review.rate}</p>
             <p>{review.comment}</p>
           </div>
         ))}
+        </CardDeck></Container >}
     </Jumbotron>
   );
 }

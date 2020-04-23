@@ -1,0 +1,21 @@
+
+.boxSession {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  text-align: center;
+  background-color: white;
+  animation: slideInFromLeft 2.5s ease;
+}
+
+.session {
+  padding: 35px 10px;
+  margin: 20px;
+  min-width: 350px;
+  min-height: 350px;
+  border: 1px solid rgb(59, 59, 57);
+  opacity: 85%;
+  background-color: #a5cf91;
+}
+
+

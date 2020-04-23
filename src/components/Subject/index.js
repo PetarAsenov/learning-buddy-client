@@ -16,7 +16,7 @@ export default function Subject({subjects}) {
           <Carousel.Item
             key={subject.id}
             style={{
-              backgroundColor: "#eaebe4",
+              backgroundColor: "#a5cf91",
               textAlign: "center",
               minHeight: "400px",
             }}
@@ -25,7 +25,7 @@ export default function Subject({subjects}) {
             <img
               src={subject.image_Url}
               alt={subject.name}
-              style={{ height: "300px" }}
+              style={{ height: "300px", marginTop: "20px" }}
             />
             <Carousel.Caption
               style={{ position: "static", marginBottom: "20px" }}
