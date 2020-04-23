@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Jumbotron from "react-bootstrap/Jumbotron";
 import Session from "../Session";
 import EditProfile from "./EditProfile";
+import Participants from "./Participants";
 import Button from "react-bootstrap/Button";
 import {
   selectUpcomingSessionByTeacher,
@@ -11,7 +12,7 @@ import {
 } from "../../store/session/selectors";
 import { useSelector } from "react-redux";
 
-export default function Profile({ profile, btn }) {
+export default function Profile({ profile, btn, participants }) {
   const isTeacher = profile.role === "teacher";
   const teacherUpcomingSessions = useSelector(
     selectUpcomingSessionByTeacher(profile.id)
@@ -42,7 +43,9 @@ export default function Profile({ profile, btn }) {
             alt={profile.name}
           />
           <p>{profile.description}</p>
-          {btn && <Button onClick={() => setShowEditForm(!showEditForm)}>Edit</Button>}
+          {btn && (
+            <Button onClick={() => setShowEditForm(!showEditForm)}>Edit</Button>
+          )}
         </div>
       )}
 
@@ -52,20 +55,36 @@ export default function Profile({ profile, btn }) {
       {isTeacher &&
         teacherUpcomingSessions &&
         teacherUpcomingSessions.map((session) => (
-          <Session key={session.id} session={session} teacher={false} btn={false} />
+          <div>
+            <Session
+              key={session.id}
+              session={session}
+              teacher={false}
+              btn={false}
+            />
+            {participants && <Participants session={session} />}
+          </div>
         ))}
       {isTeacher &&
         teacherPastSessions &&
         teacherPastSessions.map((session) => (
-          <Session key={session.id} session={session} teacher={false} btn={false}/>
+          <div>
+            <Session
+              key={session.id}
+              session={session}
+              teacher={false}
+              btn={false}
+            />
+            {participants && <Participants session={session} />}
+          </div>
         ))}
       {participantUpcomingSessions &&
         participantUpcomingSessions.map((session) => (
-          <Session key={session.id} session={session} teacher btn/>
+          <Session key={session.id} session={session} teacher btn />
         ))}
       {participantPastSessions &&
         participantPastSessions.map((session) => (
-          <Session key={session.id} session={session} teacher btn={false}/>
+          <Session key={session.id} session={session} teacher btn={false} />
         ))}
       {isTeacher &&
         profile.receivedReviews &&
