@@ -2,7 +2,10 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchSessions } from "../../store/session/actions";
 import Session from "../../components/Session";
-import { selectUpcomingSessions, selectPastSessions } from "../../store/session/selectors";
+import {
+  selectUpcomingSessions,
+  selectPastSessions,
+} from "../../store/session/selectors";
 import { selectSubject } from "../../store/subject/selectors";
 import { Col, Container, CardDeck } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
@@ -12,7 +15,7 @@ export default function ListSessions() {
   const [search, setSearch] = useState("");
   const [subject, setSubject] = useState("all");
 
-  const subjects = useSelector(selectSubject)
+  const subjects = useSelector(selectSubject);
   const upcomingSessions = useSelector(selectUpcomingSessions(subject));
   const pastSessions = useSelector(selectPastSessions(subject));
 
@@ -21,7 +24,7 @@ export default function ListSessions() {
   }, [dispatch, search]);
 
   return (
-    <div>
+    <Container>
       <Form as={Col} md={{ span: 3, offset: 0 }} className="mt-5">
         <Form.Group controlId="formBasicName">
           <Form.Control
@@ -40,35 +43,53 @@ export default function ListSessions() {
             value={subject}
             onChange={(event) => setSubject(event.target.value)}
           >
-            <option value='all'>all</option>
-            {subjects && subjects.map(subject => <option value={subject.id} key={subject.id}>{subject.name}</option>)}
+            <option value="all">all</option>
+            {subjects &&
+              subjects.map((subject) => (
+                <option value={subject.id} key={subject.id}>
+                  {subject.name}
+                </option>
+              ))}
           </Form.Control>
         </Form.Group>
       </Form>
+      <br />
       <h2>Upcoming Sessions</h2>
-      {upcomingSessions && <Container ><CardDeck>
-        {upcomingSessions.map((session) => (
-          <Session
-            key={session.id}
-            session={session}
-            teacher={true}
-            btn={true}
-            bg="light"
-          />
-        ))}</CardDeck></Container>}
-      <h2>Past Sessions</h2>
-      {pastSessions && <Container><CardDeck>
-
-        {pastSessions.map((session) => (
-          <Session
-            key={session.id}
-            session={session}
-            teacher={true}
-            btn={false}
-            bg="secondary"
-            />
+      <br />
+      {upcomingSessions && (
+        <Container>
+          <CardDeck>
+            {upcomingSessions.map((session) => (
+              <Session
+                key={session.id}
+                session={session}
+                teacher={true}
+                btn={true}
+                bg="light"
+              />
             ))}
-            </CardDeck></Container>}
-    </div>
+          </CardDeck>
+        </Container>
+      )}
+      <br />
+      <h2>Past Sessions</h2>
+      <br />
+
+      {pastSessions && (
+        <Container>
+          <CardDeck>
+            {pastSessions.map((session) => (
+              <Session
+                key={session.id}
+                session={session}
+                teacher={true}
+                btn={false}
+                bg="secondary"
+              />
+            ))}
+          </CardDeck>
+        </Container>
+      )}
+    </Container>
   );
 }

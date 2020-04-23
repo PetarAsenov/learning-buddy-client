@@ -30,7 +30,7 @@ export default function Session({ session, teacher, btn, hideSubject,bg }) {
   };
 
   return (
-    <Card bg={bg} text={ bg === 'light' ? 'dark' : 'white'} style={{ maxWidth: '14rem',minWidth: '14rem', display:'flex' }}>
+    <Card bg={bg} text={ bg === 'light' ? 'dark' : 'white'} style={{ maxWidth: '14rem',minWidth: '14rem', display:'flex', marginBottom: '1rem' }}>
       <Card.Body>
       <Card.Title>{session.title}</Card.Title>
       <Card.Text>{session.description}</Card.Text>

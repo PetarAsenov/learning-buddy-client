@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Jumbotron from "react-bootstrap/Jumbotron";
 import Session from "../Session";
 import EditProfile from "./EditProfile";
 import Participants from "./Participants";
@@ -11,9 +10,9 @@ import {
   selectPastSessionByParticipant,
 } from "../../store/session/selectors";
 import { useSelector } from "react-redux";
-import { Container, CardDeck } from "react-bootstrap";
+import { Container, CardDeck, ButtonGroup } from "react-bootstrap";
 
-export default function Profile({ profile, btn, participants }) {
+export default function Profile({ profile, participants, teacher }) {
   const isTeacher = profile.role === "teacher";
   const teacherUpcomingSessions = useSelector(
     selectUpcomingSessionByTeacher(profile.id)
@@ -28,80 +27,157 @@ export default function Profile({ profile, btn, participants }) {
     selectPastSessionByParticipant(profile.id)
   );
   const [showEditForm, setShowEditForm] = useState(false);
+  const [teach, setTeach] = useState(false);
+  const [attend, setAttend] = useState(true);
+
+  function clickTeach() {
+    if (!teach) {
+      setTeach(true);
+      setAttend(false);
+    }
+  }
+  function clickAttend() {
+    if (!attend) {
+      setAttend(true);
+      setTeach(false);
+    }
+  }
+  const teacherOrUser = teacher ? true : teach;
 
   return (
-    <Jumbotron>
-      <h1>{profile.name}</h1>
-      {!showEditForm && (
-        <div>
-          <img
-            width="130px"
-            height="180px"
-            src={
-              profile.image_Url ||
-              "https://sportgeneeskunderotterdam.nl/wp-content/uploads/2019/07/no-image-available.png"
-            }
-            alt={profile.name}
-          />
-          <p>{profile.description}</p>
-          {btn && (
-            <Button onClick={() => setShowEditForm(!showEditForm)}>Edit</Button>
-          )}
-        </div>
-      )}
-
-      {showEditForm && (
-        <EditProfile hideEditForm={() => setShowEditForm(!showEditForm)} />
-      )}
-      {isTeacher &&
-        teacherUpcomingSessions && <Container ><CardDeck>
-        {teacherUpcomingSessions.map((session) => (
+    <div>
+      <Container style={{ margin: "20px auto" }}>
+        <h1>{profile.name}</h1>
+        {!showEditForm && (
           <div>
-            <Session
-              key={session.id}
-              session={session}
-              teacher={false}
-              btn={false}
-              bg="light"
+            <img
+              width="130px"
+              height="180px"
+              src={
+                profile.image_Url ||
+                "https://sportgeneeskunderotterdam.nl/wp-content/uploads/2019/07/no-image-available.png"
+              }
+              alt={profile.name}
             />
-            {participants && <Participants session={session} />}
+            <p>{profile.description}</p>
+            {!teacher && (
+              <Button onClick={() => setShowEditForm(!showEditForm)}>
+                Edit
+              </Button>
+            )}
           </div>
-        ))}
-        </CardDeck></Container >}
-      {isTeacher &&
-        teacherPastSessions && <Container ><CardDeck>
-        {teacherPastSessions.map((session) => (
-          <div>
-            <Session
-              key={session.id}
-              session={session}
-              teacher={false}
-              btn={false}
-              bg="secondary"
-            />
-            {participants && <Participants session={session} />}
-          </div>
-        ))}
-        </CardDeck></Container >}
-      {participantUpcomingSessions && <Container ><CardDeck>
-        {participantUpcomingSessions.map((session) => (
-          <Session key={session.id} session={session} teacher btn bg="light"/>
-        ))}
-      {participantPastSessions &&
-        participantPastSessions.map((session) => (
-          <Session key={session.id} session={session} teacher btn={false} bg="secondary"/>
-        ))}
-        </CardDeck></Container >}
-      {isTeacher &&
-        profile.receivedReviews && <Container ><CardDeck>
-        {profile.receivedReviews.map((review) => (
-          // <Review key={review.id} session={review} />
-          <div key={review.id}>
-            <p>{review.rate}</p>
-            <p>{review.comment}</p>
-          </div>
-        ))}
-        </CardDeck></Container >}
-    </Jumbotron>
+        )}
+        {showEditForm && (
+          <EditProfile hideEditForm={() => setShowEditForm(!showEditForm)} />
+        )}
+      </Container>
+      <Container>
+        {!teacher && isTeacher && (
+          <ButtonGroup aria-label="Basic example">
+            <Button variant="secondary" value={teach} onClick={clickTeach}>
+              You teach
+            </Button>
+            <Button variant="secondary" value={attend} onClick={clickAttend}>
+              You attend
+            </Button>
+          </ButtonGroup>
+        )}
+        {isTeacher && teacherUpcomingSessions && teacherOrUser && (
+          <Container>
+            <br />
+            {!teacher && <h2>Sessions you teach</h2>}
+            <br />
+            <br />
+            <h2>Upcoming Sessions</h2>
+            <br />
+            <CardDeck>
+              {teacherUpcomingSessions.map((session) => (
+                <div key={session.id}>
+                  <Session
+                    session={session}
+                    teacher={false}
+                    btn={false}
+                    bg="light"
+                  />
+                  {participants && <Participants session={session} />}
+                </div>
+              ))}
+            </CardDeck>
+          </Container>
+        )}
+        {isTeacher && teacherPastSessions && teacherOrUser && (
+          <Container>
+            <br />
+            <h2>Past Sessions</h2>
+            <br />
+            <CardDeck>
+              {teacherPastSessions.map((session) => (
+                <div key={session.id}>
+                  <Session
+                    session={session}
+                    teacher={false}
+                    btn={false}
+                    bg="secondary"
+                  />
+                  {participants && <Participants session={session} />}
+                </div>
+              ))}
+            </CardDeck>
+          </Container>
+        )}
+        {!teacher && participantUpcomingSessions && attend && (
+          <Container>
+            <br />
+            <h2>Sessions you attend</h2>
+            <br />
+            <br />
+            <h2>Upcoming Sessions</h2>
+            <br />
+            <CardDeck>
+              {participantUpcomingSessions.map((session) => (
+                <Session
+                  key={session.id}
+                  session={session}
+                  teacher
+                  btn
+                  bg="light"
+                />
+              ))}
+            </CardDeck>
+          </Container>
+        )}
+        {!teacher && participantPastSessions && attend && (
+          <Container>
+            <br />
+            <h2>Past Sessions</h2>
+            <br />
+            <CardDeck>
+              {participantPastSessions.map((session) => (
+                <Session
+                  key={session.id}
+                  session={session}
+                  teacher
+                  btn={false}
+                  bg="secondary"
+                />
+              ))}
+            </CardDeck>
+          </Container>
+        )}
+        {isTeacher && profile.receivedReviews && (
+          <Container>
+            <CardDeck>
+              {profile.receivedReviews.map((review) => (
+                // <Review key={review.id} session={review} />
+                <div key={review.id}>
+                  <p>{review.rate}</p>
+                  <p>{review.comment}</p>
+                </div>
+              ))}
+            </CardDeck>
+          </Container>
+        )}
+      </Container>
+    </div>
   );
 }
