@@ -11,15 +11,12 @@ import Login from "./pages/Login";
 import { useDispatch, useSelector } from "react-redux";
 import { selectAppLoading } from "./store/appState/selectors";
 import { getUserProfile } from "./store/user/actions";
-import { fetchSubjects } from "./store/subject/actions";
-import { Jumbotron } from "react-bootstrap";
 import SessionsBySubject from "./pages/SessionsBySubject";
 import ListSessions from "./pages/ListSessions";
 import CreateSessionForm from "./pages/CreateSession";
 import MyProfile from "./pages/Profile";
-import ListSubjects from "./pages/Subjects";
-import ListTeachers from "./pages/ListTeachers";
 import TeacherDetails from "./pages/TeacherDetails";
+import Homepage from "./pages/Homepage";
 
 
 function App() {
@@ -36,7 +33,7 @@ function App() {
       <MessageBox />
       {isLoading ? <Loading /> : null}
       <Switch>
-        <Route exact path="/" component={ListSubjects} />
+        <Route exact path="/" component={Homepage} />
         <Route path="/subjects/:id" component={SessionsBySubject} />
         <Route path="/teachers/:id" component={TeacherDetails} />
         <Route path="/sessions" component={ListSessions} />
@@ -44,8 +41,6 @@ function App() {
         <Route path="/login" component={Login} />
         <Route path="/new-session" component={CreateSessionForm} />
         <Route path="/profile" component={MyProfile} />
-        <Route path="/subjects" component={ListSubjects} />
-        <Route path="/teachers" component={ListTeachers} />
       </Switch>
     </div>
   );
