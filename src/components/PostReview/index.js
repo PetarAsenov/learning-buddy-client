@@ -3,11 +3,13 @@ import { useSelector } from "react-redux";
 import { selectUser } from "../../store/user/selectors";
 import { Button } from "react-bootstrap";
 import PostReviewForm from './PostReviewForm'
+import { useParams } from "react-router-dom";
 
-export default function PostReview(id) {
+export default function PostReview() {
   const [showForm, setShowForm] = useState(false);
 
   const { token } = useSelector(selectUser);
+  const {id} = useParams()
 
   return (
     <div>

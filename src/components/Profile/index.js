@@ -173,7 +173,7 @@ export default function Profile({ profile, participants, teacher }) {
             <h2>Reviews</h2>
             <br />
             {profile.receivedReviews.map((review) => (
-                <Review key={review.id} review={review} />
+              <Review key={review.id} review={review} />
             ))}
           </Container>
         )}
