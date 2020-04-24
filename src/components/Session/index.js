@@ -1,14 +1,16 @@
 import React from "react";
-import Jumbotron from "react-bootstrap/Jumbotron";
 import Button from "react-bootstrap/Button";
+import Card from "react-bootstrap/Card";
 import { selectUser } from "../../store/user/selectors";
 import { utcToZonedTime } from "date-fns-tz";
 import { useSelector, useDispatch } from "react-redux";
 import { bookSession, unBookSession } from "../../store/session/actions";
 import { NavLink } from "react-router-dom";
+import "./style.css";
 
-export default function Session({ session, teacher, btn, hideSubject }) {
-  const startDate = utcToZonedTime(session.start_date, "YYYY")
+
+export default function Session({ session, teacher, btn, hideSubject,bg }) {
+  const startDate = utcToZonedTime(session.start_date, "Europe/Berlin")
     .toString()
     .slice(0, 21);
   const endDate = utcToZonedTime(session.end_date, "Europe/Berlin")
@@ -28,23 +30,25 @@ export default function Session({ session, teacher, btn, hideSubject }) {
   };
 
   return (
-    <Jumbotron>
-      <h1>{session.title}</h1>
-      <p>{session.description}</p>
-      <p>{startDate}</p>
-      <p>{endDate}</p>
-      {!hideSubject && <p>Subject: {session.subject.name}</p>}
+    <Card bg={bg} text={ bg === 'light' ? 'dark' : 'white'} style={{ maxWidth: '14rem',minWidth: '14rem', display:'flex', marginBottom: '1rem' }}>
+      <Card.Body>
+      <Card.Title>{session.title}</Card.Title>
+      <Card.Text>{session.description}</Card.Text>
+      <Card.Text>{startDate}</Card.Text>
+      <Card.Text>{endDate}</Card.Text>
+      {!hideSubject && <Card.Text>Subject: {session.subject.name}</Card.Text>}
       <div>
-        {teacher && <p>Teacher: {session.teacher.name}</p>}
-        <p>Participants: {session.participants.length}</p>
+        {teacher && <Card.Text>Teacher: {session.teacher.name}</Card.Text>}
+        <Card.Text>Participants: {session.participants.length}</Card.Text>
         {!btn ? null : !token ? (
           <NavLink to="/login">Login to register</NavLink>
-        ) : (
-          <Button onClick={onClickHandler}>
+          ) : (
+            <Button onClick={onClickHandler}>
             {isRegistered ? "Unregister" : "Register"}
           </Button>
         )}
       </div>
-    </Jumbotron>
+        </Card.Body>
+      </Card>
   );
 }

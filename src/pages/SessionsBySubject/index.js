@@ -5,6 +5,7 @@ import { fetchSubjectDetails } from "../../store/subject/actions";
 import Session from "../../components/Session";
 import { selectSubjectById } from "../../store/subject/selectors";
 import { utcToZonedTime } from "date-fns-tz";
+import { Container, CardDeck } from "react-bootstrap";
 
 export default function SessionsBySubject() {
   const { id } = useParams();
@@ -18,13 +19,13 @@ export default function SessionsBySubject() {
     subjectDetails &&
     subjectDetails.sessions &&
     subjectDetails.sessions.filter(
-      (session) => utcToZonedTime(session.start_date) >= new Date()
+      (session) => utcToZonedTime(session.start_date,"Europe/Berlin") >= new Date()
     );
   const pastSessionsBySubject =
     subjectDetails &&
     subjectDetails.sessions &&
     subjectDetails.sessions.filter(
-      (session) => utcToZonedTime(session.start_date) <= new Date()
+      (session) => utcToZonedTime(session.start_date,"Europe/Berlin") <= new Date()
     );
 
   return (
@@ -37,15 +38,16 @@ export default function SessionsBySubject() {
             alt={subjectDetails.name}
           />
           <h2>Upcoming Sessions</h2>
-          {upcomingSessionsBySubject &&
-            upcomingSessionsBySubject.map((session) => (
-              <Session key={session.id} session={session} btn hideSubject/>
-            ))}
+          {upcomingSessionsBySubject && <Container><CardDeck>
+            {upcomingSessionsBySubject.map((session) => (
+              <Session key={session.id} session={session} btn hideSubject bg="light"/>
+            ))}</CardDeck></Container>}
           <h2>Past Sessions</h2>
-          {pastSessionsBySubject &&
-            pastSessionsBySubject.map((session) => (
-              <Session key={session.id} session={session} btn hideSubject/>
+          {pastSessionsBySubject && <Container><CardDeck>
+            {pastSessionsBySubject.map((session) => (
+              <Session key={session.id} session={session} btn hideSubject bg="secondary"/>
             ))}
+            </CardDeck></Container>}
         </div>
       )}
     </div>

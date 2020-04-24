@@ -10,8 +10,7 @@ export default function Teacher({ teachers }) {
     >
       <div className="teacher">
         <img
-          width="140px"
-          height="150px"
+          
           src={
             teacher.image_Url ||
             "https://sportgeneeskunderotterdam.nl/wp-content/uploads/2019/07/no-image-available.png"

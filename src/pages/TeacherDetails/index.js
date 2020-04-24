@@ -38,7 +38,7 @@ export default function TeacherDetails() {
       {showForm && (
         <PostReview hideForm={() => setShowForm(!showForm)} id={id} />
       )}
-      {teacherDetails && <Profile profile={teacherDetails} />}
+      {teacherDetails && <Profile profile={teacherDetails} teacher/>}
     </div>
   );
 }
