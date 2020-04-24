@@ -1,0 +1,9 @@
+.welcome {
+  margin-top: 5rem;
+  font-family: 'Comic Neue', cursive;
+  text-align: center;
+}
+
+.welcome p {
+  font-size: 1.5rem ;
+}
