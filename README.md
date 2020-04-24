@@ -1,42 +1,24 @@
-# Frontend template
+Learning Buddy platform:
+https://learning-buddy.netlify.app/
 
-This is a simple react/redux/jwt template to start a project quickly
+User stories for this project:
 
-## Table of contents:
+As a user, I would like to sign up and login as a teacher or student.
+As a user, I would like to edit my profile by including or edit picture and description.
+As a user, I would like to be a "teacher" in the platform and create my own sessions on specific topic, date and time slot.
+As a user, I would like to see the partcipants that have booked for my sessions.
+As a user, I would like to be able to register as participant for sessions (even if I am also a teacher)
+As a user, I would like to be able to search for a session by their title or filter by subject.
+As a user, I would like to have an overview in my profile between sessions I attend as a participant and I own as a teacher.
+As a user, I would like to be able to unregister for a session I booked for before it has started.
+As a user, I would like to see the upcomig sessions first, but still see the history of the past ones.
+As a user, I would like to be able to give feedback to the teachers and see the feedback that others gave.
+As a user, I would like to see a list of all teachers in the platform.
+As a user, I would like to see a list of provided subjects in the platform and sessions filter by them.
 
-- **[Setup](#setup-how-to-use-this-template)**
-- **[Create React App docs](#cra-docs)**
+This mvp is still a work in progress. Some features still need to be implemented and revised. If you have any suggestions, please let me know here
 
-## SETUP How to use this template
+Wireframe:
 
-1. Create a new project based on this template using the `Use this template` button
-
-![HOW_TO_USE](https://user-images.githubusercontent.com/20372832/77003323-70966180-695d-11ea-8abe-b362d57135f3.gif)
-
-2. Clone the app
-
-```
-git clone git@github.com:YOUR_GITHUB_NAME/YOUR_PROJECT_NAME.git
-```
-
-3. cd into your project
-
-```
-cd YOUR_PROJECT_NAME
-```
-
-4. install dependencies
-
-```
-npm install
-```
-
-5. Start development server with npm start
-
-```
-npm start
-```
-
-## CRA docs
-
-The normal Create React App docs can be found in [CRA_DOCS.md](./CRA_DOCS.md)
+server: https://app.dbdesigner.net/designer/schema/320229
+client: https://www.lucidchart.com/documents/edit/c9b4d276-283e-48e4-a293-178b8c0ce8a3/DORPHCXR8ZbJ?shared=true
