@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Session from "../Session";
+import Review from "../Review";
 import EditProfile from "./EditProfile";
 import Participants from "./Participants";
 import Button from "react-bootstrap/Button";
@@ -10,7 +11,8 @@ import {
   selectPastSessionByParticipant,
 } from "../../store/session/selectors";
 import { useSelector } from "react-redux";
-import { Container, CardDeck, ButtonGroup } from "react-bootstrap";
+import { Container, CardDeck, ButtonGroup, CardGroup } from "react-bootstrap";
+import PostReview from "../PostReview";
 
 export default function Profile({ profile, participants, teacher }) {
   const isTeacher = profile.role === "teacher";
@@ -70,6 +72,7 @@ export default function Profile({ profile, participants, teacher }) {
         {showEditForm && (
           <EditProfile hideEditForm={() => setShowEditForm(!showEditForm)} />
         )}
+        {teacher && <PostReview id={profile.id} />}
       </Container>
       <Container>
         {!teacher && isTeacher && (
@@ -166,15 +169,12 @@ export default function Profile({ profile, participants, teacher }) {
         )}
         {isTeacher && profile.receivedReviews && (
           <Container>
-            <CardDeck>
-              {profile.receivedReviews.map((review) => (
-                // <Review key={review.id} session={review} />
-                <div key={review.id}>
-                  <p>{review.rate}</p>
-                  <p>{review.comment}</p>
-                </div>
-              ))}
-            </CardDeck>
+            <br />
+            <h2>Reviews</h2>
+            <br />
+            {profile.receivedReviews.map((review) => (
+              <Review key={review.id} review={review} />
+            ))}
           </Container>
         )}
       </Container>
