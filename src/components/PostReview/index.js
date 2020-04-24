@@ -1,52 +1,22 @@
 import React, { useState } from "react";
-import Form from "react-bootstrap/Form";
-import Col from "react-bootstrap/Col";
-import Button from "react-bootstrap/Button";
-import { useDispatch } from "react-redux";
-import { postReview } from "../../store/teacher/actions";
+import { useSelector } from "react-redux";
+import { selectUser } from "../../store/user/selectors";
+import { Button } from "react-bootstrap";
+import PostReviewForm from './PostReviewForm'
 
+export default function PostReview(id) {
+  const [showForm, setShowForm] = useState(false);
 
-export default function PostReview(props) {
-  const dispatch = useDispatch();
-  const [comment, setComment] = useState('');
-  const [rate, setRate] = useState('');
+  const { token } = useSelector(selectUser);
 
-  function submitForm(event) {
-    event.preventDefault();
-    dispatch(postReview(rate, comment, props.id))
-    props.hideForm()
-  }
-
-  
   return (
-    <Form as={Col} md={{ span: 4, offset: 0 }}>
-      <Form.Group>
-        <Form.Label>Review</Form.Label>
-        <Form.Control
-          as="textarea"
-          rows="3"
-          value={comment}
-          onChange={(event) => setComment(event.target.value)}
-          type="text"
-          placeholder="Leave your comment here"
-          required
-        />
-      </Form.Group>
-
-      <Form.Group>
-        <Form.Label>Rate</Form.Label>
-        <Form.Control
-          type="number"
-          value={rate}
-          onChange={(event) => setRate(event.target.value)}
-        />
-      </Form.Group>
-
-      <Form.Group className="mt-5">
-        <Button variant="primary" type="submit" onClick={submitForm}>
-          Confirm!
-        </Button>
-      </Form.Group>
-    </Form>
+    <div>
+      {!showForm && token && (
+        <Button onClick={() => setShowForm(!showForm)}>Make a review</Button>
+      )}
+      {showForm && (
+        <PostReviewForm hideForm={() => setShowForm(!showForm)} id={id} />
+      )}
+    </div>
   );
 }

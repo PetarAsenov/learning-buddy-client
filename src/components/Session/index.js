@@ -6,7 +6,6 @@ import { utcToZonedTime } from "date-fns-tz";
 import { useSelector, useDispatch } from "react-redux";
 import { bookSession, unBookSession } from "../../store/session/actions";
 import { NavLink } from "react-router-dom";
-import "./style.css";
 
 
 export default function Session({ session, teacher, btn, hideSubject,bg }) {
