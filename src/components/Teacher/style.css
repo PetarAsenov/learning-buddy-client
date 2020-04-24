@@ -32,10 +32,6 @@
   background-color: #a5cf91;
 }
 
-.teacher:hover {
-  opacity: 100%;
-}
-
 .teacher img {
   margin: 10px 0px;
   height: 150px;
