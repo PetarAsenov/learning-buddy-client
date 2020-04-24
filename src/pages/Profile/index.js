@@ -23,6 +23,5 @@ export default function MyProfile() {
   useEffect(() => {
     dispatch(fetchSessions());
   }, [dispatch]);
-  console.log(user)
   return <div>{user && <Profile profile={user} participants />}</div>;
 }

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectTeacher } from "../../store/teacher/selectors";
 import Teacher from "../Teacher";
 import { fetchTeachers } from "../../store/teacher/actions";
+import "../Teacher/style.css"
 
 export default function ListTeachers() {
   const dispatch = useDispatch()
