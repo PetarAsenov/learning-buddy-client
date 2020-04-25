@@ -3,10 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectTeacher } from "../../store/teacher/selectors";
 import Teacher from "../Teacher";
 import { fetchTeachers } from "../../store/teacher/actions";
-import "../Teacher/style.css"
+import {Container, CardDeck} from "react-bootstrap";
 
 export default function ListTeachers() {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchTeachers());
@@ -15,8 +15,10 @@ export default function ListTeachers() {
   const teachers = useSelector(selectTeacher);
 
   return (
-    <div className="box"> 
-      <Teacher  teachers={teachers}/>
-    </div>
-  )
+    <Container>
+      <CardDeck>
+        <Teacher teachers={teachers} />
+      </CardDeck>
+    </Container>
+  );
 }

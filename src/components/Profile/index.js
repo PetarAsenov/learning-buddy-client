@@ -11,7 +11,7 @@ import {
   selectPastSessionByParticipant,
 } from "../../store/session/selectors";
 import { useSelector } from "react-redux";
-import { Container, CardDeck, ButtonGroup, CardGroup } from "react-bootstrap";
+import { Container, CardDeck, ButtonGroup } from "react-bootstrap";
 import PostReview from "../PostReview";
 
 export default function Profile({ profile, participants, teacher }) {
