@@ -15,21 +15,22 @@ export default function SessionsBySubject() {
     setTimeout(() => dispatch(fetchSubjectDetails(id)), 100);
   }, [dispatch, id]);
   const subjectDetails = useSelector(selectSubjectById(id));
+  const sessions = subjectDetails && subjectDetails.sessions;
   const upcomingSessionsBySubject =
-    subjectDetails &&
-    subjectDetails.sessions &&
-    subjectDetails.sessions.filter(
-      (session) => utcToZonedTime(session.start_date,"Europe/Berlin") >= new Date()
+    sessions &&
+    sessions.filter(
+      (session) =>
+        utcToZonedTime(session.start_date, "Europe/Berlin") >= new Date()
     );
   const pastSessionsBySubject =
-    subjectDetails &&
-    subjectDetails.sessions &&
-    subjectDetails.sessions.filter(
-      (session) => utcToZonedTime(session.start_date,"Europe/Berlin") <= new Date()
+    sessions &&
+    sessions.filter(
+      (session) =>
+        utcToZonedTime(session.start_date, "Europe/Berlin") <= new Date()
     );
 
   return (
-    <div>
+    <Container>
       {subjectDetails && (
         <div>
           <img
@@ -38,18 +39,39 @@ export default function SessionsBySubject() {
             alt={subjectDetails.name}
           />
           <h2>Upcoming Sessions</h2>
-          {upcomingSessionsBySubject && <Container><CardDeck>
-            {upcomingSessionsBySubject.map((session) => (
-              <Session key={session.id} session={session} btn hideSubject bg="light"/>
-            ))}</CardDeck></Container>}
+          {upcomingSessionsBySubject && (
+            <Container>
+              <CardDeck>
+                {upcomingSessionsBySubject.map((session) => (
+                  <Session
+                    key={session.id}
+                    session={session}
+                    btn
+                    hideSubject
+                    bg="light"
+                  />
+                ))}
+              </CardDeck>
+            </Container>
+          )}
           <h2>Past Sessions</h2>
-          {pastSessionsBySubject && <Container><CardDeck>
-            {pastSessionsBySubject.map((session) => (
-              <Session key={session.id} session={session} btn hideSubject bg="secondary"/>
-            ))}
-            </CardDeck></Container>}
+          {pastSessionsBySubject && (
+            <Container>
+              <CardDeck>
+                {pastSessionsBySubject.map((session) => (
+                  <Session
+                    key={session.id}
+                    session={session}
+                    btn={false}
+                    hideSubject
+                    bg="secondary"
+                  />
+                ))}
+              </CardDeck>
+            </Container>
+          )}
         </div>
       )}
-    </div>
+    </Container>
   );
 }

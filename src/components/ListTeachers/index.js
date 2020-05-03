@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { selectTeacher } from "../../store/teacher/selectors";
+import { Container, CardDeck } from "react-bootstrap";
 import Teacher from "../Teacher";
+import { selectTeacher } from "../../store/teacher/selectors";
 import { fetchTeachers } from "../../store/teacher/actions";
-import {Container, CardDeck} from "react-bootstrap";
 
 export default function ListTeachers() {
   const dispatch = useDispatch();

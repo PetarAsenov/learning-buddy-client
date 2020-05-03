@@ -1,16 +1,18 @@
 import React from "react";
 import Card from "react-bootstrap/Card";
 
-export default function Review({review}) {
+export default function Review({ review: { reviewer, rate, comment } }) {
   return (
-    <Card bg='light' text='dark' style={{ minWidth: '14rem', marginBottom: '1rem' }}>
-      <Card.Title>{review.reviewer.name}</Card.Title>
+    <Card
+      bg="light"
+      text="dark"
+      style={{ minWidth: "14rem", marginBottom: "1rem" }}
+    >
+      <Card.Title>{reviewer.name}</Card.Title>
       <Card.Body>
-      <Card.Text>{review.rate}</Card.Text>
-      <Card.Text>{review.comment}</Card.Text>
+        <Card.Text>{rate}</Card.Text>
+        <Card.Text>{comment}</Card.Text>
       </Card.Body>
     </Card>
-  )
+  );
 }
-
-

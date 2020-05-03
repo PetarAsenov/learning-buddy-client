@@ -11,11 +11,11 @@ export default function EditProfile(props) {
   const dispatch = useDispatch();
   const user = useSelector(selectUser)
   const [description, setDescription] = useState(user.description || '');
-  const [image_Url, setImage_Url] = useState(user.image_Url || '');
+  const [imageUrl, setImageUrl] = useState(user.imageUrl || '');
 
   function submitForm(event) {
     event.preventDefault();
-    dispatch(editUserProfile(image_Url, description))
+    dispatch(editUserProfile(imageUrl, description))
     props.hideEditForm()
   }
 
@@ -39,13 +39,13 @@ export default function EditProfile(props) {
         <Form.Label>Image url</Form.Label>
         <Form.Control
           type="text"
-          value={image_Url}
-          onChange={(event) => setImage_Url(event.target.value)}
+          value={imageUrl}
+          onChange={(event) => setImageUrl(event.target.value)}
           placeholder="put here your best photo"
         />
-        {image_Url ? (
+        {imageUrl ? (
           <Col className="mt-4" md={{ span: 4, offset: 0 }}>
-            <Image src={image_Url} alt="preview" thumbnail />
+            <Image src={imageUrl} alt="preview" thumbnail />
           </Col>
         ) : null}
       </Form.Group>

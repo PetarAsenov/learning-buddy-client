@@ -1,23 +1,21 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
-import { useDispatch } from "react-redux";
 import { postReview } from "../../store/teacher/actions";
-
 
 export default function PostReviewForm(props) {
   const dispatch = useDispatch();
-  const [comment, setComment] = useState('');
-  const [rate, setRate] = useState('');
+  const [comment, setComment] = useState("");
+  const [rate, setRate] = useState("");
 
   function submitForm(event) {
     event.preventDefault();
-    dispatch(postReview(rate, comment, props.id))
-    props.hideForm()
+    dispatch(postReview(rate, comment, props.id));
+    props.hideForm();
   }
 
-  
   return (
     <Form as={Col} md={{ span: 4, offset: 0 }}>
       <Form.Group>
