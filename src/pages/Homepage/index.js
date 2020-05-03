@@ -1,8 +1,8 @@
 import React from "react";
-import ListSubjects from "../../components/Subjects";
 import ListTeachers from "../../components/ListTeachers";
 import { Col, Row } from "react-bootstrap";
 import "./styles.css";
+import Subject from "../../components/Subject";
 
 export default function index() {
   return (
@@ -23,7 +23,7 @@ export default function index() {
           </p>
         </Col>
         <Col md={{ span: 5, offset: 0 }}>
-          <ListSubjects />
+          <Subject />
         </Col>
       </Row>
       <ListTeachers />

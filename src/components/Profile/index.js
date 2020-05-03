@@ -1,18 +1,17 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
+import { Container, CardDeck, ButtonGroup, Button } from "react-bootstrap";
 import Session from "../Session";
 import Review from "../Review";
 import EditProfile from "./EditProfile";
 import Participants from "./Participants";
-import Button from "react-bootstrap/Button";
+import PostReview from "../PostReview";
 import {
   selectUpcomingSessionByTeacher,
   selectPastSessionByTeacher,
   selectUpcomingSessionByParticipant,
   selectPastSessionByParticipant,
 } from "../../store/session/selectors";
-import { useSelector } from "react-redux";
-import { Container, CardDeck, ButtonGroup } from "react-bootstrap";
-import PostReview from "../PostReview";
 
 export default function Profile({ profile, participants, teacher }) {
   const isTeacher = profile.role === "teacher";
@@ -99,7 +98,7 @@ export default function Profile({ profile, participants, teacher }) {
                   <Session
                     session={session}
                     teacher={false}
-                    btn={false}
+                    btn={teacher}
                     bg="light"
                   />
                   {participants && <Participants session={session} />}
@@ -172,9 +171,10 @@ export default function Profile({ profile, participants, teacher }) {
             <br />
             <h2>Reviews</h2>
             <br />
-            {profile.receivedReviews.map((review) => (
-             review.reviewer && <Review key={review.id} review={review} />
-            ))}
+            {profile.receivedReviews.map(
+              (review) =>
+                review.reviewer && <Review key={review.id} review={review} />
+            )}
           </Container>
         )}
       </Container>
