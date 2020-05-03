@@ -4,7 +4,6 @@ import { Container, CardDeck, ButtonGroup, Button } from "react-bootstrap";
 import Session from "../Session";
 import Review from "../Review";
 import EditProfile from "./EditProfile";
-import Participants from "./Participants";
 import PostReview from "../PostReview";
 import {
   selectUpcomingSessionByTeacher,
@@ -13,7 +12,7 @@ import {
   selectPastSessionByParticipant,
 } from "../../store/session/selectors";
 
-export default function Profile({ profile, participants, teacher }) {
+export default function Profile({ profile, teacher }) {
   const isTeacher = profile.role === "teacher";
   const teacherUpcomingSessions = useSelector(
     selectUpcomingSessionByTeacher(profile.id)
@@ -94,15 +93,14 @@ export default function Profile({ profile, participants, teacher }) {
             <br />
             <CardDeck>
               {teacherUpcomingSessions.map((session) => (
-                <div key={session.id}>
-                  <Session
-                    session={session}
-                    teacher={false}
-                    btn={teacher}
-                    bg="light"
-                  />
-                  {participants && <Participants session={session} />}
-                </div>
+                <Session
+                  key={session.id}
+                  session={session}
+                  teacher={false}
+                  btn={teacher}
+                  bg="light"
+                  showParticipants={!teacher}
+                />
               ))}
             </CardDeck>
           </Container>
@@ -114,15 +112,14 @@ export default function Profile({ profile, participants, teacher }) {
             <br />
             <CardDeck>
               {teacherPastSessions.map((session) => (
-                <div key={session.id}>
-                  <Session
-                    session={session}
-                    teacher={false}
-                    btn={false}
-                    bg="secondary"
-                  />
-                  {participants && <Participants session={session} />}
-                </div>
+                <Session
+                  key={session.id}
+                  session={session}
+                  teacher={false}
+                  btn={false}
+                  bg="secondary"
+                  showParticipants={!teacher}
+                />
               ))}
             </CardDeck>
           </Container>
