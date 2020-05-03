@@ -6,8 +6,16 @@ import { utcToZonedTime } from "date-fns-tz";
 import { useSelector, useDispatch } from "react-redux";
 import { bookSession, unBookSession } from "../../store/session/actions";
 import { NavLink } from "react-router-dom";
+import Participants from "./Participants";
 
-export default function Session({ session, teacher, btn, hideSubject, bg }) {
+export default function Session({
+  session,
+  teacher,
+  btn,
+  hideSubject,
+  bg,
+  showParticipants,
+}) {
   const startDate = utcToZonedTime(session.start_date, "Europe/Berlin")
     .toString()
     .slice(0, 21);
@@ -55,6 +63,7 @@ export default function Session({ session, teacher, btn, hideSubject, bg }) {
             </Button>
           )}
         </div>
+        {showParticipants && <Participants session={session} bg={bg === "light" ? "secondary" : "light"}/>}
       </Card.Body>
     </Card>
   );
