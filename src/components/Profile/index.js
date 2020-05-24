@@ -1,16 +1,15 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { Container, CardDeck, ButtonGroup, Button } from "react-bootstrap";
+import { Container, CardDeck, ButtonGroup, Button, Col, Row } from "react-bootstrap";
 import Session from "../Session";
 import Review from "../Review";
-import EditProfile from "./EditProfile";
-import PostReview from "../PostReview";
 import {
   selectUpcomingSessionByTeacher,
   selectPastSessionByTeacher,
   selectUpcomingSessionByParticipant,
   selectPastSessionByParticipant,
 } from "../../store/session/selectors";
+import ProfileData from "./myProfile";
 
 export default function Profile({ profile, teacher }) {
   const isTeacher = profile.role === "teacher";
@@ -26,7 +25,6 @@ export default function Profile({ profile, teacher }) {
   const participantPastSessions = useSelector(
     selectPastSessionByParticipant(profile.id)
   );
-  const [showEditForm, setShowEditForm] = useState(false);
   const [teach, setTeach] = useState(false);
   const [attend, setAttend] = useState(true);
 
@@ -46,39 +44,22 @@ export default function Profile({ profile, teacher }) {
 
   return (
     <div>
-      <Container style={{ margin: "20px auto" }}>
-        <h1>{profile.name}</h1>
-        {!showEditForm && (
-          <div>
-            <img
-              width="130px"
-              height="180px"
-              src={
-                profile.image_Url ||
-                "https://sportgeneeskunderotterdam.nl/wp-content/uploads/2019/07/no-image-available.png"
-              }
-              alt={profile.name}
-            />
-            <p>{profile.description}</p>
-            {!teacher && (
-              <Button onClick={() => setShowEditForm(!showEditForm)}>
-                Edit
-              </Button>
-            )}
-          </div>
-        )}
-        {showEditForm && (
-          <EditProfile hideEditForm={() => setShowEditForm(!showEditForm)} />
-        )}
-        {teacher && <PostReview id={profile.id} />}
-      </Container>
-      <Container>
+      <ProfileData profile={profile} teacher={teacher} />
+      <Container >
         {!teacher && isTeacher && (
-          <ButtonGroup aria-label="Basic example">
-            <Button variant="secondary" value={teach} onClick={clickTeach}>
+          <ButtonGroup aria-label="Basic example" as={Row}  style={{width: "100%"}} size="lg">
+            <Button
+              variant="secondary"
+              value={teach}
+              onClick={clickTeach}
+              as={Col}
+              md={{ span: 4, offset: 2 }}
+              block
+            >
               You teach
             </Button>
-            <Button variant="secondary" value={attend} onClick={clickAttend}>
+            <Button variant="secondary" value={attend} onClick={clickAttend} as={Col}
+              md={{ span: 4, offset: 0}}>
               You attend
             </Button>
           </ButtonGroup>

@@ -10,14 +10,17 @@ export default function PostReview() {
 
   const { token } = useSelector(selectUser);
   const {id} = useParams()
+  const showFormHandler = () => {
+    setShowForm(!showForm)
+  }
 
   return (
     <div>
       {!showForm && token && (
-        <Button onClick={() => setShowForm(!showForm)}>Make a review</Button>
+        <Button style={{ width: "130px", display: "block", marginTop: 3 }} onClick={showFormHandler}>Make a review</Button>
       )}
       {showForm && (
-        <PostReviewForm hideForm={() => setShowForm(!showForm)} id={id} />
+        <PostReviewForm hideForm={showFormHandler} id={id} />
       )}
     </div>
   );
