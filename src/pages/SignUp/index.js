@@ -13,6 +13,7 @@ export default function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("");
+  const [checkTerms, setCheckTerms] = useState(false)
   const dispatch = useDispatch();
   const token = useSelector(selectToken);
   const history = useHistory();
@@ -34,15 +35,16 @@ export default function SignUp() {
     setRole("");
   }
 
-  function onCheck(event) {
-    console.log('onCheck: ', event); // always called
+  function onCheck() {
+    setCheckTerms(!checkTerms)
   }
- 
+
   const label = (
-    <span>I have read and agree with the&nbsp;
-      <Link to="/login">Terms and Conditions</Link>
+    <span>
+      I have read and agree with the&nbsp;
+      <Link to="/terms">Terms and Conditions</Link>*
     </span>
-  )
+  );
 
   return (
     <Container>
@@ -56,7 +58,7 @@ export default function SignUp() {
         </Form.Group>
         <Form.Group as={Row} controlId="formBasicName">
           <Form.Label column sm="4">
-            Name
+            Name*
           </Form.Label>
           <Col sm="8">
             <Form.Control
@@ -70,7 +72,7 @@ export default function SignUp() {
         </Form.Group>
         <Form.Group as={Row} controlId="formBasicEmail">
           <Form.Label column sm="4">
-            Email
+            Email*
           </Form.Label>
           <Col sm="8">
             <Form.Control
@@ -85,7 +87,7 @@ export default function SignUp() {
 
         <Form.Group as={Row} controlId="formBasicPassword">
           <Form.Label column sm="4">
-            Password
+            Password*
           </Form.Label>
           <Col sm="8">
             <Form.Control
@@ -100,7 +102,7 @@ export default function SignUp() {
 
         <Form.Group as={Row} controlId="exampleForm.SelectCustomSizeSm">
           <Form.Label column sm="4">
-            Select your role
+            Select your role*
           </Form.Label>
           <Col sm="8">
             <Form.Control
@@ -120,14 +122,19 @@ export default function SignUp() {
           md={{ span: 8, offset: 4 }}
           controlId="formBasicCheckbox"
         >
-          <Form.Check type="checkbox" label={label} />
+          <Form.Check
+            type="checkbox"
+            label={label}
+            value={true}
+            onChange={onCheck}
+          />
         </Form.Group>
         <Form.Group
           as={Col}
           md={{ span: 8, offset: 4 }}
           className="mt-5 text-center"
         >
-          <Button variant="primary" type="submit" onClick={submitForm}>
+          <Button variant="primary" type="submit" onClick={submitForm} disabled={!checkTerms}>
             Sign up
           </Button>
         </Form.Group>

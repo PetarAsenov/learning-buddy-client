@@ -17,6 +17,7 @@ import CreateSessionForm from "./pages/CreateSession";
 import MyProfile from "./pages/Profile";
 import TeacherDetails from "./pages/TeacherDetails";
 import Homepage from "./pages/Homepage";
+import Terms from "./pages/Terms";
 
 
 function App() {
@@ -41,6 +42,7 @@ function App() {
         <Route path="/login" component={Login} />
         <Route path="/new-session" component={CreateSessionForm} />
         <Route path="/profile" component={MyProfile} />
+        <Route path="/terms" component={Terms} />
       </Switch>
     </div>
   );
