@@ -21,7 +21,7 @@ export default function EditProfile(props) {
 
   
   return (
-    <Form as={Col} md={{ span: 4, offset: 0 }}>
+    <Form >
       <Form.Group>
         <Form.Label>Description</Form.Label>
         <Form.Control
