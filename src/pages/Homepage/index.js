@@ -2,7 +2,8 @@ import React from "react";
 import ListTeachers from "../../components/ListTeachers";
 import { Col, Row } from "react-bootstrap";
 import "./styles.css";
-import Subject from "../../components/Subject";
+import Video from "../../components/VideoEmbed"
+// import Subject from "../../components/Subject";
 
 export default function index() {
   return (
@@ -23,7 +24,8 @@ export default function index() {
           </p>
         </Col>
         <Col md={{ span: 5, offset: 0 }}>
-          <Subject />
+          <Video youtubeId="TH-HXV-Bn6Y"/>
+          {/* <Subject /> */}
         </Col>
       </Row>
       <ListTeachers />
