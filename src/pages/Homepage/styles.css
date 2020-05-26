@@ -5,5 +5,10 @@
 }
 
 .welcome p {
-  font-size: 1.5rem ;
+  font-size: 1.4rem ;
+}
+
+.welcome .quote {
+  text-align: left;
+  font-size: 1.1rem ;
 }

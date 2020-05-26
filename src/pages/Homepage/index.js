@@ -1,34 +1,41 @@
 import React from "react";
-import ListTeachers from "../../components/ListTeachers";
-import { Col, Row } from "react-bootstrap";
+import { Link } from "react-router-dom";
+// import ListTeachers from "../../components/ListTeachers";
+import { Container, Col, Row, Button } from "react-bootstrap";
 import "./styles.css";
-import Video from "../../components/VideoEmbed"
+import Video from "../../components/VideoEmbed";
 // import Subject from "../../components/Subject";
 
 export default function index() {
   return (
-    <div>
-      <Row style={{ dispaly: "flex" }}>
-        <Col className="welcome" md={{ span: 5, offset: 1 }}>
-          <h2>
-            Welcome to the Learning Buddy platform
-            <br />
-            <br />
-            Here you can learn and help others learn
-          </h2>
-          <br />
+    <Container>
+      <Row className="welcome">
+        <Col  md={{ span: 6, offset: 0 }}>
+          <h3>Here you can learn or help others learn</h3>
+          <br/>
           <p>
-            Register for an upcoming session to experience
-            <br /> the personal and interactive learning
-            <br /> with one of our volunteering teachers{" "}
+            Learning buddy platform helps children improve in their studies by
+            connecting them with volunteering mentors for a personalized and
+            digital learning session
           </p>
         </Col>
-        <Col md={{ span: 5, offset: 0 }}>
-          <Video youtubeId="TH-HXV-Bn6Y"/>
+        <Col md={{ span: 6, offset: 0 }}>
+          <Video youtubeId="TH-HXV-Bn6Y" />
+          <p className="quote">
+            "This will make my life so much easier!" Tim - 4th grade
+          </p>
           {/* <Subject /> */}
         </Col>
       </Row>
-      <ListTeachers />
-    </div>
+      {/* <ListTeachers /> */}
+      <Row style={{justifyContent:"center"}} className="mt-5">
+      <Link to="/teachers">
+        <Button variant="primary" className="mr-3 px-5 py-2">See our teachers</Button>
+      </Link>
+      <Link to="/sessions">
+        <Button variant="primary" className="ml-3 px-5 py-2">See our sessions</Button>
+      </Link>
+      </Row>
+    </Container>
   );
 }
