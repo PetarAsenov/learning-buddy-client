@@ -22,7 +22,6 @@ import Homepage from "./pages/Homepage";
 import Terms from "./pages/Terms";
 import Footer from "./components/Footer";
 
-
 function App() {
   const dispatch = useDispatch();
   const isLoading = useSelector(selectAppLoading);
