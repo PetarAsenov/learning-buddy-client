@@ -4,6 +4,7 @@ export default ({ youtubeId }) => {
   return (
     <div
       className="video"
+      title="learning-buddy"
       style={{
         position: "relative",
         paddingBottom: "56.25%" /* 16:9 */,
