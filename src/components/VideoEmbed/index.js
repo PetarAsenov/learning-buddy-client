@@ -12,6 +12,7 @@ export default ({ youtubeId }) => {
       }}
     >
       <iframe
+        title="learning-buddy"
         style={{
           position: "absolute",
           top: 0,
