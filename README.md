@@ -1,42 +1,85 @@
-# Frontend template
+# Learning-Buddy platform: #
 
-This is a simple react/redux/jwt template to start a project quickly
+ ## [Check out current version](https://learning-buddy.netlify.app/) ##
 
-## Table of contents:
+Learning-Buddy is a platform where valunteer teachers can connect with students in need and organize sessions.
 
-- **[Setup](#setup-how-to-use-this-template)**
-- **[Create React App docs](#cra-docs)**
+## Table of contents
 
-## SETUP How to use this template
+- [App demo](#App-demo)
+- [Technology used](#technology-used)
+- [Goals for this project](#goals-for-this-project)
+- [User Stories and Wireframe](#user-stories-and-wireframe)
+- [Git workflow](#git-workflow)
+- [Server-repo](#server-repo)
 
-1. Create a new project based on this template using the `Use this template` button
+## App demo ##
 
-![HOW_TO_USE](https://user-images.githubusercontent.com/20372832/77003323-70966180-695d-11ea-8abe-b362d57135f3.gif)
+![screenshot1](https://user-images.githubusercontent.com/58357193/80647381-a7888880-8a6e-11ea-8c16-c8985a881445.png)
 
-2. Clone the app
+![screenshot2](https://user-images.githubusercontent.com/58357193/80647566-f8987c80-8a6e-11ea-8985-03c48743a9fc.png)
 
-```
-git clone git@github.com:YOUR_GITHUB_NAME/YOUR_PROJECT_NAME.git
-```
+![image](https://user-images.githubusercontent.com/58357193/80647688-30072900-8a6f-11ea-90d2-9c3abb2acd88.png)
 
-3. cd into your project
+![image](https://user-images.githubusercontent.com/58357193/80647894-7fe5f000-8a6f-11ea-93ee-08bf431530b7.png)
 
-```
-cd YOUR_PROJECT_NAME
-```
+## Technology used ##
 
-4. install dependencies
+- [React]
+- [Redux]
+- [Express]
+  - [REST API]
+- [Sequelize]
+- [React-Bootstrap]
 
-```
-npm install
-```
+## Goals for this project ##
 
-5. Start development server with npm start
+The goal of this project is to build a full-stack app:
 
-```
-npm start
-```
+- practice full-stack development
+- practice learning new technology independently
+- apply what we learned in the bootcamp
+- showcase development approach of using wireframes and user stories
+- practice disciplined [git usage](#git-workflow)
 
-## CRA docs
+## User Stories and Wireframe ##
 
-The normal Create React App docs can be found in [CRA_DOCS.md](./CRA_DOCS.md)
+
+### User stories for this project: ###
+
+* As a user, I would like to sign up and login as a teacher or student.
+
+* As a user, I would like to edit my profile by including or edit picture and description.
+* As a user, I would like to be a "teacher" in the platform and create my own sessions on specific topic, date and time slot.
+* As a user, I would like to see the partcipants that have booked for my sessions.
+* As a user, I would like to be able to register as participant for sessions (even if I am also a teacher)
+* As a user, I would like to be able to search for a session by their title or filter by subject.
+* As a user, I would like to have an overview in my profile between sessions I attend as a participant and I own as a teacher.
+* As a user, I would like to be able to unregister for a session I booked for before it has started.
+* As a user, I would like to see the upcomig sessions first, but still see the history of the past ones.
+* As a user, I would like to be able to give feedback to the teachers and see the feedback that others gave.
+* As a user, I would like to see a list of all teachers in the platform.
+* As a user, I would like to see a list of provided subjects in the platform and sessions filter by them.
+
+*This mvp is still a work in progress. Some features still need to be implemented and revised. If you have any suggestions, please let me know here*
+
+### Wireframe: ###
+
+server:
+
+![image](https://user-images.githubusercontent.com/58357193/80648249-23370500-8a70-11ea-990a-efb354cfd33a.png)
+
+[see client wireframes in lucidchart](https://www.lucidchart.com/documents/edit/c9b4d276-283e-48e4-a293-178b8c0ce8a3/DORPHCXR8ZbJ?shared=true)
+
+## Git workflow
+
+In this project I try to use:
+
+- Good commit messages
+- Well named branches
+- Pull requests with summaries
+
+
+## Server-repo
+
+The server side of this project is an Express server connected to a Sequelize database. [Click here for more details](https://github.com/PetarAsenov/learning-buddy-server)

@@ -1,6 +1,6 @@
 import { apiUrl } from "../../config/constants";
 import axios from "axios";
-import { selectToken } from "./selectors";
+import { selectToken, selectUser } from "./selectors";
 import {
   appLoading,
   appDoneLoading,
@@ -11,6 +11,7 @@ import {
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const TOKEN_STILL_VALID = "TOKEN_STILL_VALID";
 export const LOG_OUT = "LOG_OUT";
+export const EDIT_PROFILE_SUCCESS = "EDIT_PROFILE_SUCCESS"
 
 const loginSuccess = userWithToken => {
   return {
@@ -24,16 +25,22 @@ const tokenStillValid = userWithoutToken => ({
   payload: userWithoutToken
 });
 
+const editProfileSuccess = user => ({
+  type: EDIT_PROFILE_SUCCESS,
+  payload: user
+})
+
 export const logOut = () => ({ type: LOG_OUT });
 
-export const signUp = (name, email, password) => {
+export const signUp = (name, email, password, role) => {
   return async (dispatch, getState) => {
     dispatch(appLoading());
     try {
       const response = await axios.post(`${apiUrl}/signup`, {
         name,
         email,
-        password
+        password,
+        role
       });
 
       dispatch(loginSuccess(response.data));
@@ -104,6 +111,56 @@ export const getUserWithStoredToken = () => {
       }
       // if we get a 4xx or 5xx response,
       // get rid of the token by logging out
+      dispatch(logOut());
+      dispatch(appDoneLoading());
+    }
+  };
+};
+
+
+export const getUserProfile = () => {
+  return async (dispatch, getState) => {
+    const token = selectToken(getState());
+    if (token === null) return;
+
+    dispatch(appLoading());
+    try {
+      const response = await axios.get(`${apiUrl}/myprofile`, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      dispatch(tokenStillValid(response.data));
+      dispatch(appDoneLoading());
+    } catch (error) {
+      if (error.response) {
+        console.log(error.response.message);
+      } else {
+        console.log(error);
+      }
+      dispatch(logOut());
+      dispatch(appDoneLoading());
+    }
+  };
+};
+
+export const editUserProfile = (image_Url,description) => {
+  return async (dispatch, getState) => {
+    const token = selectToken(getState());
+    const {id} = selectUser(getState())
+    if (token === null) return;
+
+    dispatch(appLoading());
+    try {
+      const response = await axios.patch(`${apiUrl}/user/${id}`,{image_Url,description}, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      dispatch(editProfileSuccess(response.data));
+      dispatch(appDoneLoading());
+    } catch (error) {
+      if (error.response) {
+        console.log(error.response.message);
+      } else {
+        console.log(error);
+      }
       dispatch(logOut());
       dispatch(appDoneLoading());
     }
